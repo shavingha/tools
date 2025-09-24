@@ -47,7 +47,7 @@ class SSRToClashConverter:
                 "IP-CIDR,17.0.0.0/8,DIRECT",
                 "IP-CIDR,100.64.0.0/10,DIRECT",
                 "GEOIP,CN,DIRECT",
-                "MATCH,PROXY",
+                "MATCH,AUTO",
             ],
         }
         self.timeout = 30
