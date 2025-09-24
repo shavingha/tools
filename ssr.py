@@ -360,7 +360,7 @@ class SSRToClashConverter:
     def save_clash_config(self, config_content: str, output_file: str):
         """保存Clash配置到文件"""
         try:
-            with open(output_file, "w", encoding="utf-8") as f:
+            with open(output_file, "w", encoding="utf-8", newline="\n") as f:
                 f.write(config_content)
             print(f"配置已保存到: {output_file}")
         except Exception as e:
