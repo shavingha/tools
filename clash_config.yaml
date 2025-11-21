@@ -5,69 +5,69 @@ mode: Rule
 port: 7890
 proxies:
 - cipher: aes-256-gcm
-  name: JMS-731341@c90s1.portablesubmarines.com:15325
-  password: 9GfXqoYsCCGkogps
-  port: 15325
-  server: 104.225.238.209
+  name: JMS-1268850@c83s1.portablesubmarines.com:15130
+  password: c5Tc3F7W44WcBdED
+  port: 15130
+  server: 104.160.41.123
   type: ss
 - cipher: aes-256-gcm
-  name: JMS-731341@c90s2.portablesubmarines.com:15325
-  password: 9GfXqoYsCCGkogps
-  port: 15325
-  server: 104.225.156.211
+  name: JMS-1268850@c83s2.portablesubmarines.com:15130
+  password: c5Tc3F7W44WcBdED
+  port: 15130
+  server: 104.160.44.223
   type: ss
 - alterId: 0
   cipher: auto
-  name: JMS-731341@c90s3.portablesubmarines.com:15325
+  name: JMS-1268850@c83s3.portablesubmarines.com:15130
   network: tcp
-  port: 15325
-  server: 198.181.43.95
+  port: 15130
+  server: 198.181.44.203
   type: vmess
-  uuid: 35900538-d931-4000-88ae-4751e9784470
+  uuid: ddf88f41-c23e-46a0-80fa-062bb90bc848
 - alterId: 0
   cipher: auto
-  name: JMS-731341@c90s4.portablesubmarines.com:15325
+  name: JMS-1268850@c83s4.portablesubmarines.com:15130
   network: tcp
-  port: 15325
-  server: 45.78.58.111
+  port: 15130
+  server: 23.106.141.34
   type: vmess
-  uuid: 35900538-d931-4000-88ae-4751e9784470
+  uuid: ddf88f41-c23e-46a0-80fa-062bb90bc848
 - alterId: 0
   cipher: auto
-  name: JMS-731341@c90s5.portablesubmarines.com:15325
+  name: JMS-1268850@c83s5.portablesubmarines.com:15130
   network: tcp
-  port: 15325
-  server: 162.248.74.168
+  port: 15130
+  server: 104.193.8.40
   type: vmess
-  uuid: 35900538-d931-4000-88ae-4751e9784470
+  uuid: ddf88f41-c23e-46a0-80fa-062bb90bc848
 - alterId: 0
   cipher: auto
-  name: JMS-731341@c90s801.portablesubmarines.com:15325
+  name: JMS-1268850@c83s801.portablesubmarines.com:15130
   network: tcp
-  port: 15325
-  server: 104.225.152.34
+  port: 15130
+  server: 45.62.104.100
   type: vmess
-  uuid: 35900538-d931-4000-88ae-4751e9784470
+  uuid: ddf88f41-c23e-46a0-80fa-062bb90bc848
 proxy-groups:
 - name: PROXY
   proxies:
   - DIRECT
-  - JMS-731341@c90s1.portablesubmarines.com:15325
-  - JMS-731341@c90s2.portablesubmarines.com:15325
-  - JMS-731341@c90s3.portablesubmarines.com:15325
-  - JMS-731341@c90s4.portablesubmarines.com:15325
-  - JMS-731341@c90s5.portablesubmarines.com:15325
-  - JMS-731341@c90s801.portablesubmarines.com:15325
+  - JMS-1268850@c83s1.portablesubmarines.com:15130
+  - JMS-1268850@c83s2.portablesubmarines.com:15130
+  - JMS-1268850@c83s3.portablesubmarines.com:15130
+  - JMS-1268850@c83s4.portablesubmarines.com:15130
+  - JMS-1268850@c83s5.portablesubmarines.com:15130
+  - JMS-1268850@c83s801.portablesubmarines.com:15130
   type: select
 - interval: 300
   name: Auto
   proxies:
-  - JMS-731341@c90s1.portablesubmarines.com:15325
-  - JMS-731341@c90s2.portablesubmarines.com:15325
-  - JMS-731341@c90s3.portablesubmarines.com:15325
-  - JMS-731341@c90s4.portablesubmarines.com:15325
-  - JMS-731341@c90s5.portablesubmarines.com:15325
-  - JMS-731341@c90s801.portablesubmarines.com:15325
+  - JMS-1268850@c83s1.portablesubmarines.com:15130
+  - JMS-1268850@c83s2.portablesubmarines.com:15130
+  - JMS-1268850@c83s3.portablesubmarines.com:15130
+  - JMS-1268850@c83s4.portablesubmarines.com:15130
+  - JMS-1268850@c83s5.portablesubmarines.com:15130
+  - JMS-1268850@c83s801.portablesubmarines.com:15130
   type: url-test
   url: http://www.gstatic.com/generate_204
 rules:

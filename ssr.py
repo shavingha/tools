@@ -376,9 +376,6 @@ def main():
 使用示例:
   python ssr.py "https://example.com/ssr-subscription"
   python ssr.py "https://example.com/ssr-subscription" -o my_config.yaml
-  python ssr.py "https://example.com/ssr-subscription" -p 8080 -s 8081
-  python ssr.py "https://example.com/ssr-subscription" --mode global
-  python ssr.py "https://example.com/ssr-subscription" --no-rules
         """,
     )
 
@@ -392,140 +389,24 @@ def main():
         default="clash_config.yaml",
         help="输出文件名 (默认: clash_config.yaml)",
     )
-    parser.add_argument(
-        "--stdout", action="store_true", help="直接输出到标准输出，不保存文件"
-    )
-
-    # 端口配置
-    parser.add_argument(
-        "-p", "--port", type=int, default=7890, help="Clash HTTP代理端口 (默认: 7890)"
-    )
-    parser.add_argument(
-        "-s",
-        "--socks-port",
-        type=int,
-        default=7891,
-        help="Clash SOCKS代理端口 (默认: 7891)",
-    )
-    parser.add_argument(
-        "--external-controller",
-        default="127.0.0.1:9090",
-        help="Clash外部控制器地址 (默认: 127.0.0.1:9090)",
-    )
-
-    # 模式配置
-    parser.add_argument(
-        "--mode",
-        choices=["Rule", "Global", "Direct"],
-        default="Rule",
-        help="Clash运行模式 (默认: Rule)",
-    )
-    parser.add_argument(
-        "--log-level",
-        choices=["debug", "info", "warning", "error", "silent"],
-        default="info",
-        help="日志级别 (默认: info)",
-    )
-
-    # 功能选项
-    parser.add_argument("--allow-lan", action="store_true", help="允许局域网连接")
-    parser.add_argument(
-        "--no-rules", action="store_true", help="不添加默认规则，仅生成代理配置"
-    )
-    parser.add_argument(
-        "--custom-rules", type=str, help="自定义规则文件路径，将替换默认规则"
-    )
-    parser.add_argument(
-        "--timeout", type=int, default=30, help="网络请求超时时间(秒) (默认: 30)"
-    )
-
-    # 代理组配置
-    parser.add_argument(
-        "--proxy-group-name", default="PROXY", help="主代理组名称 (默认: PROXY)"
-    )
-    parser.add_argument(
-        "--auto-group-name", default="Auto", help="自动选择组名称 (默认: Auto)"
-    )
-    parser.add_argument(
-        "--url-test-url",
-        default="http://www.gstatic.com/generate_204",
-        help="URL测试地址 (默认: http://www.gstatic.com/generate_204)",
-    )
-    parser.add_argument(
-        "--url-test-interval", type=int, default=300, help="URL测试间隔(秒) (默认: 300)"
-    )
-
-    # 其他选项
-    parser.add_argument("-v", "--verbose", action="store_true", help="显示详细输出信息")
-    parser.add_argument(
-        "--version", action="version", version="SSR to Clash Converter 1.0.0"
-    )
 
     args = parser.parse_args()
 
-    # 创建转换器
+    # 创建转换器（使用默认配置）
     converter = SSRToClashConverter()
 
-    # 配置转换器参数
-    converter.clash_config["port"] = args.port
-    converter.clash_config["socks-port"] = args.socks_port
-    converter.clash_config["external-controller"] = args.external_controller
-    converter.clash_config["mode"] = args.mode
-    converter.clash_config["log-level"] = args.log_level
-    converter.clash_config["allow-lan"] = args.allow_lan
-
-    # 更新代理组名称
-    converter.clash_config["proxy-groups"][0]["name"] = args.proxy_group_name
-    converter.clash_config["proxy-groups"][1]["name"] = args.auto_group_name
-    converter.clash_config["proxy-groups"][1]["url"] = args.url_test_url
-    converter.clash_config["proxy-groups"][1]["interval"] = args.url_test_interval
-
-    # 处理规则配置
-    if args.no_rules:
-        converter.clash_config["rules"] = ["MATCH,PROXY"]
-    elif args.custom_rules:
-        try:
-            with open(args.custom_rules, "r", encoding="utf-8") as f:
-                custom_rules = [line.strip() for line in f.readlines() if line.strip()]
-                converter.clash_config["rules"] = custom_rules
-        except Exception as e:
-            print(f"读取自定义规则文件失败: {e}")
-            sys.exit(1)
-
-    # 设置网络超时
-    converter.timeout = args.timeout
-
-    if args.verbose:
-        print("=" * 60)
-        print("SSR订阅地址转Clash配置转换器")
-        print("=" * 60)
-        print(f"订阅地址: {args.subscription_url}")
-        print(f"输出文件: {args.output if not args.stdout else '标准输出'}")
-        print(f"HTTP端口: {args.port}")
-        print(f"SOCKS端口: {args.socks_port}")
-        print(f"运行模式: {args.mode}")
-        print(f"日志级别: {args.log_level}")
-        print(f"允许局域网: {args.allow_lan}")
-        print("=" * 60)
-    else:
-        print("SSR订阅地址转Clash配置转换器")
-        print("=" * 50)
+    print("SSR订阅地址转Clash配置转换器")
+    print("=" * 50)
 
     try:
         # 转换配置
         clash_config = converter.convert_subscription_to_clash(args.subscription_url)
 
         if clash_config:
-            if args.stdout:
-                # 输出到标准输出
-                print(clash_config)
-            else:
-                # 保存到文件
-                converter.save_clash_config(clash_config, args.output)
-                print(
-                    f"\n转换完成！共转换 {len(converter.clash_config['proxies'])} 个节点"
-                )
-                print(f"请将 {args.output} 文件导入到Clash客户端中使用")
+            # 保存到文件
+            converter.save_clash_config(clash_config, args.output)
+            print(f"\n转换完成！共转换 {len(converter.clash_config['proxies'])} 个节点")
+            print(f"请将 {args.output} 文件导入到Clash客户端中使用")
         else:
             print("转换失败，请检查订阅地址是否正确")
             sys.exit(1)
@@ -535,10 +416,6 @@ def main():
         sys.exit(1)
     except Exception as e:
         print(f"转换过程中发生错误: {e}")
-        if args.verbose:
-            import traceback
-
-            traceback.print_exc()
         sys.exit(1)
 
 
