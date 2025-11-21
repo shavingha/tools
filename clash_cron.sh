@@ -18,8 +18,8 @@ CLASH_HTTP_PORT="${CLASH_HTTP_PORT:-7890}"
 # 订阅脚本及地址（按需修改）
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 SSR_SCRIPT="${SSR_SCRIPT:-${SCRIPT_DIR}/ssr.py}"
-SUB_URL_PRIMARY="${SUB_URL_PRIMARY:-https://jmssub.net/members/getsub.php?service=731341&id=35900538-d931-4000-88ae-4751e9784470}"
-SUB_URL_FALLBACK="${SUB_URL_FALLBACK:-https://jjsubmarines.com/members/getsub.php?service=731341&id=35900538-d931-4000-88ae-4751e9784470}"
+SUB_URL_PRIMARY="${SUB_URL_PRIMARY:-https://jmssub.net/members/getsub.php?service=1268850&id=ddf88f41-c23e-46a0-80fa-062bb90bc848}"
+SUB_URL_FALLBACK="${SUB_URL_FALLBACK:-https://jjsubmarines.com/members/getsub.php?service=1268850&id=ddf88f41-c23e-46a0-80fa-062bb90bc848}"
 
 # 连通性检测目标
 TEST_URL="${TEST_URL:-https://www.google.com.hk/generate_204}"
