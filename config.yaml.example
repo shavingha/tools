@@ -1,0 +1,35 @@
+allow-lan: false
+external-controller: 127.0.0.1:9090
+log-level: info
+mode: Rule
+port: 7890
+proxies:
+  - name: example-node
+    type: ss
+    server: example.com
+    port: 443
+    cipher: aes-256-gcm
+    password: "replace-me"
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - DIRECT
+      - example-node
+  - name: Auto
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - example-node
+rules:
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,17.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Auto
+socks-port: 7891
